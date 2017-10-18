@@ -181,6 +181,7 @@
     </dependencies>
     <build>
         <finalName>smallkk</finalName>
+        <!--配置强制加载  在启动编译的时候可能会编译有些xml文件;所以此处给它强制加载-->
         <resources>
             <resource>
                 <directory>src/main/java</directory>
