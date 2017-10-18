@@ -11,7 +11,10 @@
       http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
     <!--包扫描-->
-    <context:component-scan base-package="com.smallkk"/>
+    <context:component-scan base-package="com.smallkk.*.controller">
+        <!--<context:component-scan base-package="com.smallkk.*.controller">   上下这两个都可以：排除service或者只扫描controller-->
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
+    </context:component-scan>
     <!--开启MVC注解 主要扫描：@Controller-->
     <mvc:annotation-driven/>
     <!--前端模板 此处是Velocity 视图解析器-->
