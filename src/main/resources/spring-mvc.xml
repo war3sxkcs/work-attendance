@@ -17,6 +17,10 @@
     </context:component-scan>
     <!--开启MVC注解 主要扫描：@Controller-->
     <mvc:annotation-driven/>
+
+    <!--处理静态资源-->
+    <mvc:default-servlet-handler/>
+
     <!--前端模板 此处是Velocity 视图解析器-->
     <bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
         <property name="suffix" value=".vm"/>
