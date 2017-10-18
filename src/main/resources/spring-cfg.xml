@@ -22,15 +22,20 @@
     <!--整合Mybatis-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="com/smallkk/**/**.xml"/>
+        <property name="mapperLocations" value="classpath:com/smallkk/**/**.xml"/>
     </bean>
     <!-- Mapper的接口扫描-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.smallkk"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
+    <!--事务声明-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
     <!--数据源-->
-    <context:property-placeholder location="jdbc.properties"/>
+    <context:property-placeholder location="classpath:jdbc.properties"/>
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           destroy-method="close" init-method="init">
         <property name="url" value="${jdbc_url}"/>
@@ -66,9 +71,5 @@
         <!-- <property name="filters" value="stat" /> -->
         <property name="filters" value="mergeStat"/>
     </bean>
-    <!--事务声明-->
-    <tx:annotation-driven transaction-manager="transactionManager"/>
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" value="dataSource"/>
-    </bean>
+
 </beans>
