@@ -46,6 +46,14 @@
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
+    <!--此处的default是spring-mvc里面的default处理默认静态资源的;此处的作用是将路径中的资源进行放过-->
+    <!--那么这个路径中的资源就不会经过interceptor这个拦截器了-->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/*</url-pattern>
+    </servlet-mapping>
+
+
     <error-page>
         <error-code>404</error-code>
         <location>/WEB-INF/views/404.html</location>

@@ -10,8 +10,12 @@
       http://www.springframework.org/schema/mvc
       http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
+    <!--                         配置json                       -->
     <mvc:annotation-driven>
         <mvc:message-converters>
+            <!--匹配到字符串就好-->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <!--json-->
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
                 <property name="supportedMediaTypes">
                     <list>
@@ -32,8 +36,14 @@
     <!--开启MVC注解 主要扫描：@Controller-->
     <mvc:annotation-driven/>
 
-    <!--处理静态资源-->
+    <!--处理静态资源--><!--加载静态资源-->     <!--web.xml里面配置了这个default拦截的资源-->
     <mvc:default-servlet-handler/>
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <bean class="com.smallkk.common.interceptor.SessionInterceptor">
+        </bean>
+    </mvc:interceptors>
 
     <!--前端模板 此处是Velocity 视图解析器-->
     <bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
@@ -55,4 +65,8 @@
             </props>
         </property>
     </bean>
+
+    <!--错误配置-->
+
+
 </beans>

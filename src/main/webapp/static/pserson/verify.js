@@ -36,7 +36,15 @@ $("#submitId").click(function () {
             data: {"username": user, "password": pwd},
             //成功之后   通过回调函数 跳转到主页
             success: function (data) {
-                alert(data);
+                if (data == "login_succ") {
+                    window.location.href = "/user/home";
+                } else {
+                    $.pnotify({
+                        title: 'New Thing',
+                        text: '用户名或密码不正确,请重新输入.',
+                        type: 'success'
+                    });
+                }
             }
         });
     }
