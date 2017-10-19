@@ -28,6 +28,16 @@ $("#submitId").click(function () {
         veryfiy = false;
     }
     if (veryfiy) {
-        $("#login_from").submit();
+        //用ajax提交表单
+        $.ajax({
+            type: "POST",
+            url: "/login/check",
+            // username是后端的求值;user是本页面js从html中获取的输入的值;   通过ajax这样进行传值
+            data: {"username": user, "password": pwd},
+            //成功之后   通过回调函数 跳转到主页
+            success: function (data) {
+                alert(data);
+            }
+        });
     }
 })
