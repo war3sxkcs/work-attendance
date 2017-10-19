@@ -10,9 +10,11 @@
     <script type="text/javascript" src="/static/assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="/static/assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/assets/js/pnotify/jquery.pnotify.min.js"></script>
+    <script type="text/javascript" id="bdshare_js" data="type=slide&img=0&pos=right&uid=11824"></script>
+    <script type="text/javascript" id="bdshell_js"></script>
+    <script type="text/javascript" src="/static/pserson/share.js"></script>
     <script type="text/javascript"
             src="http://api.map.baidu.com/api?v=2.0&ak=3jVn3AdujYynq2Li4OIIC9X7Xzki4HA8"></script>
-
 </head>
 <body>
 <object id="player">
@@ -21,9 +23,6 @@
            enableerrordialogs="false" stretchtofit="true" enabled="true" fullscreen="false" invokeurls="false"
            playcount="1" rate="1" volume="50" showdisplay="false"></embed>
 </object>
-</div>
-<div id="preloader">
-</div>
 <div class="container">
     <div class="" id="login-wrapper">
         <div class="row">
@@ -46,9 +45,7 @@
                             <input type="password" id="pwd" class="form-control">
                         </div>
                         <div class="checkbox pull-left">
-                            <label>
-                                <input type="checkbox" data-toggle="modal"
-                                       data-target="#myModal">记住用户名</label>
+                            <label><input type="checkbox" data-toggle="modal" data-target="#myModal">记住用户名</label>
                         </div>
                         <button id="submitId" class="btn btn btn-primary pull-right" type="button">登 录</button>
                     </form>
@@ -60,18 +57,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row-block">
-                        <div class="row">
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <p>&nbsp;</p>
     <div style="text-align:center;margin:0 auto;">
-        <h6 style="color:#fff;">Copyright(C)2017 smallkk.com All Rights Reserved<br/>
-            小坤坤的个人学习 版权所有 蜀ICP备17027347号</h6>
+        <h6 style="color:#fff;">Copyright(C)2017 smallkk.com All Rights Reserved<br/>小坤坤的个人学习 版权所有 蜀ICP备17027347号</h6>
     </div>
     <div>
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -82,9 +73,7 @@
                                 aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel">友情提示</h4>
                     </div>
-                    <div class="modal-body">
-                        点击了“记住用户名”;信息泄露我不负责
-                    </div>
+                    <div class="modal-body">点击了“记住用户名”;信息泄露我不负责</div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
@@ -93,102 +82,10 @@
         </div>
     </div>
 </div>
-<div>
-    <br> <br> <br>
-    <!--百度地图容器-->
-    <div style="width:100%;height:300px;border:#ccc solid 1px;font-size:12px" id="map"></div>
+<div><p></p>
+    <div style="width:100%;height:350px;border:#ccc solid 1px;font-size:12px" id="map" class="bottom"></div>
 </div>
 </body>
 </html>
-<script>
-    $("#submitId").click(function () {
-        var user = $("#user").val();
-        var pwd = $("#pwd").val();
-        var veryfiy = true;
-        if (user == 0 && pwd == 0) {
-            $.pnotify({
-                title: 'New Thing',
-                text: '请输入用户名和密码.',
-                type: 'info'
-            });
-            veryfiy = false;
-            return;
-        }
-        if (user == 0) {
-            $.pnotify({
-                title: 'New Thing',
-                text: '请输入用户名.',
-                type: 'error'
-            });
-            veryfiy = false;
-        }
-        if (pwd == 0) {
-            $.pnotify({
-                title: 'New Thing',
-                text: '请输入密码.',
-                type: 'error'
-            });
-            veryfiy = false;
-        }
-        if (veryfiy) {
-            $("#login_from").submit();
-        }
-    })
-</script>
-<script type="text/javascript">
-    // 百度地图API功能
-    var map = new BMap.Map("allmap");
-    var point = new BMap.Point(116.331398, 39.897445);
-    map.centerAndZoom(point, 12);
-
-    var geolocation = new BMap.Geolocation();
-    geolocation.getCurrentPosition(function (r) {
-        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-            var mk = new BMap.Marker(r.point);
-            map.addOverlay(mk);
-            map.panTo(r.point);
-            alert('您的位置：' + r.point.lng + ',' + r.point.lat);
-        }
-        else {
-            alert('failed' + this.getStatus());
-        }
-    }, {enableHighAccuracy: true})
-    //关于状态码
-    //BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
-    //BMAP_STATUS_CITY_LIST	城市列表。对应数值“1”。
-    //BMAP_STATUS_UNKNOWN_LOCATION	位置结果未知。对应数值“2”。
-    //BMAP_STATUS_UNKNOWN_ROUTE	导航结果未知。对应数值“3”。
-    //BMAP_STATUS_INVALID_KEY	非法密钥。对应数值“4”。
-    //BMAP_STATUS_INVALID_REQUEST	非法请求。对应数值“5”。
-    //BMAP_STATUS_PERMISSION_DENIED	没有权限。对应数值“6”。(自 1.1 新增)
-    //BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
-    //BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
-</script>
-<!-- Baidu Button BEGIN -->
-<script type="text/javascript" id="bdshare_js" data="type=slide&img=0&pos=right&uid=11824"></script>
-<script type="text/javascript" id="bdshell_js"></script>
-
-<script>window._bd_share_config = {
-    "common": {
-        "bdSnsKey": {},
-        "bdText": "",
-        "bdMini": "1",
-        "bdMiniList": ["weixin", "sqq", "qzone", "tsina", "tieba", "mail"],
-        "bdPic": "",
-        "bdStyle": "0",
-        "bdSize": "16"
-    },
-    "slide": {"type": "slide", "bdImg": "0", "bdPos": "right", "bdTop": "100"},
-    "image": {"viewList": ["weixin", "sqq", "qzone", "tsina"], "viewText": "分享到：", "viewSize": "16"},
-    "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["weixin", "sqq", "qzone", "tsina"]}
-};
-with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
-<style type="text/css">
-    .yincang {
-        width: 0px;
-        height: 0px;
-        overflow: hidden;
-    }
-
-</style>
-<!-- Baidu Button END -->
+<script type="text/javascript" src="/static/pserson/verify.js"></script>
+<script type="text/javascript" src="/static/pserson/map.js"></script>
