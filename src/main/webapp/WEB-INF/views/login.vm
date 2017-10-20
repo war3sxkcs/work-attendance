@@ -23,12 +23,14 @@
            enableerrordialogs="false" stretchtofit="true" enabled="true" fullscreen="false" invokeurls="false"
            playcount="1" rate="1" volume="50" showdisplay="false"></embed>
 </object>
-<div class="container">
+<div class="container" id="login_div">
     <div class="" id="login-wrapper">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div id="logo-login">
-                    <h2>Work-attendance<span>v1.3</span></h2>
+                    <h2>Work-attendance
+                        <small>v1.3</small>
+                    </h2>
                 </div>
             </div>
         </div>
@@ -51,7 +53,7 @@
                     <div class="row-block">
                         <div class="row">
                             <div class="col-md-12 row-block">
-                                <a href="#" class="btn btn-primary btn-block">Create New Account</a>
+                                <a href="/login/down" class="btn btn-primary btn-block">Create New Account</a>
                             </div>
                         </div>
                     </div>
@@ -60,7 +62,8 @@
         </div>
     </div>
     <div style="text-align:center;margin:0 auto;">
-        <h6 style="color:#fff;">Copyright(C)2017 smallkk.com All Rights Reserved<br/>小坤坤的个人学习 版权所有 蜀ICP备17027347号</h6>
+        <h6 style="color:#fff;">Copyright(&copy;)2017 smallkk.com All Rights Reserved<br/>小坤坤的个人学习 版权所有 蜀ICP备17027347号
+        </h6>
     </div>
     <div>
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -81,7 +84,7 @@
     </div>
 </div>
 <div><p></p>
-    <div style="width:100%;height:350px;border:#ccc solid 1px;font-size:12px" id="map" class="bottom"></div>
+    <div id="allmap" style="width:100%;border:#ccc solid 1px;font-size:12px;"></div>
 </div>
 </body>
 </html>

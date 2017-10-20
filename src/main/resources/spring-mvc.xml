@@ -26,8 +26,6 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-
-
     <!--包扫描-->
     <context:component-scan base-package="com.smallkk.*.controller">
         <!--<context:component-scan base-package="com.smallkk.*.controller">   上下这两个都可以：排除service或者只扫描controller-->
@@ -35,16 +33,13 @@
     </context:component-scan>
     <!--开启MVC注解 主要扫描：@Controller-->
     <mvc:annotation-driven/>
-
     <!--处理静态资源--><!--加载静态资源-->     <!--web.xml里面配置了这个default拦截的资源-->
     <mvc:default-servlet-handler/>
-
     <!--配置拦截器-->
     <mvc:interceptors>
         <bean class="com.smallkk.common.interceptor.SessionInterceptor">
         </bean>
     </mvc:interceptors>
-
     <!--前端模板 此处是Velocity 视图解析器-->
     <bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
         <property name="suffix" value=".vm"/>
@@ -65,8 +60,11 @@
             </props>
         </property>
     </bean>
-
+    <!--配置上传下载-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="50000"/>
+        <property name="maxInMemorySize" value="50000"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
     <!--错误配置-->
-
-
 </beans>
