@@ -3,67 +3,72 @@
 <head>
     <meta charset="utf-8">
     <title>小坤坤的个人学习</title>
-    <link rel="stylesheet" href="/static/assets/css/loader-style.css">
-    <link rel="stylesheet" href="/static/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/assets/css/signin.css">
-    <link rel="shortcut icon" href="/static/assets/ico/minus.png">
-    <script type="text/javascript" src="/static/assets/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/static/assets/js/pnotify/jquery.pnotify.min.js"></script>
+    <link rel="stylesheet" href="/static/own/assets/css/loader-style.css">
+    <link rel="stylesheet" href="/static/own/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/own/assets/css/signin.css">
+    <link rel="shortcut icon" href="/static/own/assets/ico/minus.png">
+    <script type="text/javascript" src="/static/own/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/own/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/own/assets/js/pnotify/jquery.pnotify.min.js"></script>
     <script type="text/javascript" id="bdshare_js" data="type=slide&img=0&pos=right&uid=11824"></script>
     <script type="text/javascript" id="bdshell_js"></script>
-    <script type="text/javascript" src="/static/pserson/share.js"></script>
+    <script type="text/javascript" src="/static/own/personal/share.js"></script>
     <script type="text/javascript"
             src="http://api.map.baidu.com/api?v=2.0&ak=3jVn3AdujYynq2Li4OIIC9X7Xzki4HA8"></script>
 </head>
 <body>
 <object id="player">
-    <embed src="/static/music/music3.mp3" height="0px" width="0px" autostart="true" url=""
+    <embed src="/static/own/music/music3.mp3" height="0px" width="0px" autostart="true" url=""
            uimode="full" balance="0" currentposition="0" currentmarker="0" enablecontextmenu="false"
            enableerrordialogs="false" stretchtofit="true" enabled="true" fullscreen="false" invokeurls="false"
            playcount="1" rate="1" volume="50" showdisplay="false"></embed>
 </object>
-<div class="container" id="login_div">
-    <div class="" id="login-wrapper">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div id="logo-login">
-                    <h2>Work-attendance
-                        <small>v1.3</small>
-                    </h2>
+<div id="login_div">
+    <div class="container">
+        <div class="" id="login-wrapper">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div id="logo-login">
+                        <h2>Work-attendance
+                            <small>v1.3</small>
+                        </h2>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="account-box">
-                    <div class="form-group">
-                        <label for="user">用户名</label>
-                        <input type="text" id="user" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="pwd">密码</label>
-                        <input type="password" id="pwd" class="form-control">
-                    </div>
-                    <div class="checkbox pull-left">
-                        <label><input type="checkbox" data-toggle="modal" data-target="#myModal">记住用户名</label>
-                    </div>
-                    <button id="submitId" class="btn btn btn-primary pull-right" type="button">登 录</button>
-                    <hr>
-                    <div class="row-block">
-                        <div class="row">
-                            <div class="col-md-12 row-block">
-                                <a href="/login/down" class="btn btn-primary btn-block">Create New Account</a>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="account-box">
+                        <div class="form-group">
+                            <label for="user">用户名</label>
+                            <input type="text" id="user" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">密码</label>
+                            <input type="password" id="pwd" class="form-control">
+                        </div>
+                        <div class="checkbox pull-left">
+                            <label><input type="checkbox" data-toggle="modal" data-target="#myModal">记住用户名</label>
+                        </div>
+                        <button id="submitId" class="btn btn btn-primary pull-right" type="button">登 录</button>
+                        <hr>
+                        <div class="row-block">
+                            <div class="row">
+                                <div class="col-md-12 row-block">
+                                    <a class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal2">Create
+                                        New Account</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div style="text-align:center;margin:0 auto;">
-        <h6 style="color:#fff;">Copyright(&copy;)2017 smallkk.com All Rights Reserved<br/>小坤坤的个人学习 版权所有 蜀ICP备17027347号
-        </h6>
+        <div style="text-align:center;margin:0 auto;">
+            <h6 style="color:#fff;">Copyright(&copy;)2017 smallkk.com All Rights Reserved<br/>小坤坤的个人学习
+                <a href="/login/down" style="text-decoration-line: none; color: #fff">版权所有</a>
+                蜀ICP备17027347号
+            </h6>
+        </div>
     </div>
     <div>
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -81,12 +86,54 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel2">新用户注册</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <div class="form-group">
+                                    <label for="user">电子邮件</label>
+                                    <input type="email" id="user" class="form-control" placeholder="请输入你用于登录的邮箱">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">密码</label>
+                                    <input type="password" id="pwd" class="form-control" placeholder="请输入你要设置的密码">
+                                </div>
+                                <div class="form-group">
+                                    <label for="code">验证码</label>
+                                    <label>
+                                        <img src="/login/authCode" id="codeImage" onclick="chageCode()"
+                                             style="cursor:pointer;"/>
+                                    </label>
+                                    <label><a onclick="chageCode()">换一张</a></label>
+                                    <input type="password" id="code" class="form-control" placeholder="请输入验证码">
+                                </div>
+                                <label><h6>注意：请检查您的邮箱是否有收到与本网站注册相关的电子邮件;点击电子邮件中的链接即可激活账户!</h6></label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-default  pull-right">Access</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div><p></p>
-    <div id="allmap" style="width:100%;border:#ccc solid 1px;font-size:12px;"></div>
-</div>
+<div id="allmap" style="width:100%;border:#ccc solid 1px;font-size:12px;"></div>
 </body>
 </html>
-<script type="text/javascript" src="/static/pserson/verify.js"></script>
-<script type="text/javascript" src="/static/pserson/map.js"></script>
+<script type="text/javascript" src="/static/own/personal/verify.js"></script>
+<script type="text/javascript" src="/static/own/personal/map.js"></script>
+<script>
+    function chageCode() {
+        $('#codeImage').attr('src', getAuthCode());
+    }
+</script>

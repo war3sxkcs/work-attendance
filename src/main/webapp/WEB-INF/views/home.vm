@@ -1,99 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
-    <title>小坤坤的个人学习</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <style type="text/css">
-        body {
-            overflow: hidden !important;
-            padding-top: 120px;
-        }
-    </style>
-    <script type="text/javascript" src="/static/assets/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="/static/assets/css/style.css">
-    <link rel="stylesheet" href="/static/assets/css/loader-style.css">
-    <link rel="stylesheet" href="/static/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/assets/css/signin.css">
-    <link rel="stylesheet" href="/static/assets/css/extra-pages.css">
-    <link rel="shortcut icon" href="/static/assets/ico/minus.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>码码在线考勤系统</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/ionicons.min.css">
+    <link rel="stylesheet" href="/static/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/static/dist/css/skins/skin-blue.min.css">
 </head>
-<body id="lock">
-<div id="preloader">
-    <div id="status">&nbsp;</div>
-</div>
-<section class="page-error">
-    <div class="headline-lock text-center" id="time">
-        <span></span>
-    </div>
-    <div class="lockscreen-name"><h2>恭喜你登录成功!!!</h2></div>
-    <div class="lockscreen-image">
-        <img src="http://api.randomuser.me/portraits/thumb/men/41.jpg" alt="user image">
-    </div>
-    <div class="lockscreen-item">
-        <div class="lockscreen-credentials">
-            <div class="input-group">
-                <input type="password" class="form-control" placeholder="password">
-                <div class="input-group-btn">
-                    <button class="btn btn-flat"><i class="fa fa-arrow-right text-muted"></i>
-                    </button>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="/user/home" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg">码码考勤</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- Messages: style can be found in dropdown.less-->
+                    <li class="dropdown messages-menu">
+                        <!-- Menu toggle button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="label label-success">4</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">您有4条信息待处理</li>
+                            <li class="footer"><a href="#">查看所有信息</a></li>
+                        </ul>
+                    </li>
+                    <!-- /.messages-menu -->
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- The user image in the navbar-->
+                            <img src="" class="user-image user_head_img" alt="User Image">
+                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                            <span class="hidden-xs user_name"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-right">
+                                    <a href="/user/logout" class="btn btn-default btn-flat">退出系统</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="" class="img-circle  user_head_img" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p class="user_name"></p>
+                    <!-- Status -->
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
-        </div>
+
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu">
+
+                <!-- Optionally, you can add icons to the links -->
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>我的考勤</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/attend">打卡记录</a></li>
+                        <li><a href="/reAttend">补签记录</a></li>
+                        </require>
+                        <li><a href="/reAttend/list">待办补签</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Page Header
+                <small>Optional description</small>
+            </h1>
+        </section>
+        <section class="content">
+        </section>
     </div>
-    <div class="lockscreen-link">
-        <a class="lock-link" href="/login">Or sign in as a different user</a>
-    </div>
-</section>
-<script type="text/javascript" src="/static/assets/js/load.js"></script>
-<script type="text/javascript" src="/static/assets/js/main.js"></script>
-<script type="text/javascript">
-    $(function () {
-        startTime();
-        $(".center").center();
-        $(window).resize(function () {
-            $(".center").center();
-        });
-    });
-
-    function startTime() {
-        var today = new Date();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-        // add a zero in front of numbers<10
-        m = checkTime(m);
-        s = checkTime(s);
-        //Check for PM and AM
-        var day_or_night = (h > 11) ? "PM" : "AM";
-        //Convert to 12 hours system
-        if (h > 12)
-            h -= 12;
-        //Add time to the headline and update every 500 milliseconds
-        $('#time').html(h + ":" + m + ":" + s + " " + day_or_night);
-        setTimeout(function () {
-            startTime()
-        }, 500);
-    }
-
-    function checkTime(i) {
-        if (i < 10) {
-            i = "0" + i;
-        }
-        return i;
-    }
-
-    /* CENTER ELEMENTS IN THE SCREEN */
-    jQuery.fn.center = function () {
-        this.css("position", "absolute");
-        this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) +
-                $(window).scrollTop()) - 30 + "px");
-        this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) +
-                $(window).scrollLeft()) + "px");
-        return this;
-    }
-</script>
+    <footer class="main-footer">
+        <strong>Copyright &copy; 2016 <a href="#">码码在线</a>.</strong> All rights reserved.
+    </footer>
+</div>
+<script src="/static/jquery/jquery-2.2.3.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/dist/js/app.min.js"></script>
+<script src="/static/js/user.js"></script>
 </body>
 </html>
