@@ -1,6 +1,9 @@
 package com.smallkk.attend.dao;
 
 import com.smallkk.attend.entity.Attend;
+import com.smallkk.vo.QueryCondition;
+
+import java.util.List;
 
 public interface AttendMapper {
     int deleteByPrimaryKey(Long id);
@@ -16,4 +19,10 @@ public interface AttendMapper {
     int updateByPrimaryKey(Attend record);
 
     Attend selectTodaySignRecord(Long userId);
+
+    int countByCondition(QueryCondition condition);
+
+    List<Attend> selectAttendPage(QueryCondition condition);
+
+
 }

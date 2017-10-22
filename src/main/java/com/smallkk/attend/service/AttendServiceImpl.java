@@ -2,7 +2,9 @@ package com.smallkk.attend.service;
 
 import com.smallkk.attend.dao.AttendMapper;
 import com.smallkk.attend.entity.Attend;
+import com.smallkk.common.page.PageQueryBean;
 import com.smallkk.common.utils.DateUtils;
+import com.smallkk.vo.QueryCondition;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created By  醉美柳舞之众星捧月
@@ -69,5 +72,21 @@ public class AttendServiceImpl implements AttendService {
             throw e;
             //如果不抛出去;事务将无法回滚    事务是基于异常来回滚的
         }
+    }
+
+    @Override
+    public PageQueryBean listAttend(QueryCondition condition) {
+        //根据条件查询 count 记录数目
+        int count = attendMapper.countByCondition(condition);
+        PageQueryBean pageResult = new PageQueryBean();
+        if (count > 0) {
+            pageResult.setTotalRows(count);
+            pageResult.setCurrentPage(condition.getCurrentPage());
+            pageResult.setPageSize(condition.getPageSize());
+            List<Attend> attendList = attendMapper.selectAttendPage(condition);
+            pageResult.setItems(attendList);
+        }
+        // 如果有记录  才去查询分页数据 没有相关记录数目 没必要去查分页数据
+        return pageResult;
     }
 }
