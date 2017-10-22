@@ -1,8 +1,10 @@
 package com.smallkk.attend.controller;
+
 import com.smallkk.attend.entity.Attend;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 /**
  * Created By  醉美柳舞之众星捧月
  *
@@ -16,6 +18,7 @@ public class AttendController {
     public String toAttend() {
         return "attend";
     }
+
     public String signAttend(@RequestBody Attend attend) {
         return null;
     }

@@ -140,7 +140,6 @@ public class LoginController {
         g.dispose();
         ImageIO.write(image, "JPEG", response.getOutputStream());
         response.getOutputStream().flush();
-
     }
 
     //创建颜色
