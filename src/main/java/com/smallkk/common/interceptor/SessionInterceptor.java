@@ -1,7 +1,9 @@
 package com.smallkk.common.interceptor;
+
 import com.smallkk.user.entity.User;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,7 +18,7 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         String uri = request.getRequestURI();
-        if (uri.indexOf("login") >= 0||uri==null) {
+        if (uri.indexOf("login") >= 0 || uri.indexOf("sign") >= 0 || uri.indexOf("error") >= 0) {
             return true;
         }
         HttpSession session = request.getSession();

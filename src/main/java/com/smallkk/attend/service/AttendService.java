@@ -9,5 +9,5 @@ import com.smallkk.attend.entity.Attend;
  * @date 2017/10/22 16:54
  */
 public interface AttendService {
-    void signAttend(Attend attend);
+    void signAttend(Attend attend) throws Exception;
 }
