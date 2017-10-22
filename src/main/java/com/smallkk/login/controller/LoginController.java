@@ -14,11 +14,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 /**
  * Created By  醉美柳舞之众星捧月
@@ -75,7 +81,7 @@ public class LoginController {
      */
     @RequestMapping("/register")
     @ResponseBody
-    public String register(@RequestBody User user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public String register(@RequestBody User user, HttpServletRequest request) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         // @RequestBody 通过json 的形式把用户传进来
         userService.createUser(user);
         return "succ";
@@ -84,11 +90,71 @@ public class LoginController {
     //    文件下载
     @RequestMapping("/down")
     public ResponseEntity<byte[]> download() throws IOException {
-        String path = "C://Users//song//Desktop//oracle.txt";     //  文件所在地和文件的名字格式
+        String path = "\\static\\personal\\1.jpg";
+        //  文件所在地和文件的名字格式
         File file = new File(path);
         HttpHeaders headers = new HttpHeaders();      //告诉Http头
         headers.setContentDispositionFormData("attachment", path);   //我这儿有一个附件  ;path是路径
-        headers.setContentType(MediaType.TEXT_PLAIN);     // 这个附件是什么类型的
+        headers.setContentType(MediaType.IMAGE_JPEG);     // 这个附件是什么类型的
         return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
+    }
+
+    @RequestMapping("/authCode")
+    public void getAuthCode(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+            throws IOException {
+        int width = 63;
+        int height = 37;
+        Random random = new Random();
+        //设置response头信息
+        //禁止缓存
+        response.setHeader("Pragma", "No-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        //生成缓冲区image类
+        BufferedImage image = new BufferedImage(width, height, 1);
+        //产生image类的Graphics用于绘制操作
+        Graphics g = image.getGraphics();
+        //Graphics类的样式
+        g.setColor(this.getRandColor(200, 250));
+        g.setFont(new Font("Times New Roman", 0, 28));
+        g.fillRect(0, 0, width, height);
+        //绘制干扰线
+        for (int i = 0; i < 40; i++) {
+            g.setColor(this.getRandColor(130, 200));
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            int x1 = random.nextInt(12);
+            int y1 = random.nextInt(12);
+            g.drawLine(x, y, x + x1, y + y1);
+        }
+        //绘制字符
+        String strCode = "";
+        for (int i = 0; i < 4; i++) {
+            String rand = String.valueOf(random.nextInt(10));
+            strCode = strCode + rand;
+            g.setColor(new Color(20 + random.nextInt(110), 20 + random.nextInt(110), 20 + random.nextInt(110)));
+            g.drawString(rand, 13 * i + 6, 28);
+        }
+        //将字符保存到session中用于前端的验证
+        session.setAttribute("strCode", strCode);
+        g.dispose();
+        ImageIO.write(image, "JPEG", response.getOutputStream());
+        response.getOutputStream().flush();
+
+    }
+
+    //创建颜色
+    Color getRandColor(int fc, int bc) {
+        Random random = new Random();
+        if (fc > 255) {
+            fc = 255;
+        }
+        if (bc > 255) {
+            bc = 255;
+        }
+        int r = fc + random.nextInt(bc - fc);
+        int g = fc + random.nextInt(bc - fc);
+        int b = fc + random.nextInt(bc - fc);
+        return new Color(r, g, b);
     }
 }
