@@ -14,3 +14,4 @@ var h1 = (login_div.offsetHeight + 20);
 var h2 = $(window).height();
 var h = h2 - h1;
 $("#allmap").css("height", h);
+

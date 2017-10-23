@@ -18,7 +18,7 @@
 </head>
 <body>
 <object id="player">
-    <embed id="music" src="/static/own/music/music3.mp3" height="0px" width="0px" autostart="true" url=""
+    <embed id="music" src="/static/own/music/music.mp3" height="0px" width="0px" autostart="true" url=""
            uimode="full" balance="0" currentposition="0" currentmarker="0" enablecontextmenu="false"
            enableerrordialogs="false" stretchtofit="true" enabled="true" fullscreen="false" invokeurls="false"
            playcount="1" rate="1" volume="50" showdisplay="false"></embed>
@@ -134,6 +134,11 @@
 <script type="text/javascript" src="/static/own/personal/map.js"></script>
 <script>
     function chageCode() {
-        $('#codeImage').attr('src', getAuthCode())
+        document.getElementById("codeImage").src = "/login/authCode?" + Math.random();
     }
+
+    var ur1 = "/static/own/music/music";
+    var ur2 = ".mp3";
+    var num = parseInt(Math.random() * 10);
+    document.getElementById("music").src = ur1 + num + ur2;
 </script>
