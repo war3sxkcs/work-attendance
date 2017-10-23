@@ -10,6 +10,7 @@ import java.util.List;
  * @date 2017/10/23 1:05
  */
 public class PageQueryBean {
+
     private static final int DEFAULT_PAGE_SIZE = 10;
     /**
      * 当前页
@@ -36,12 +37,15 @@ public class PageQueryBean {
      */
     private List<?> items;
 
+
     public final Integer getStartRow() {
         if (startRow == null) {
+
             startRow = (currentPage == null ? 0 : (currentPage - 1) * getPageSize());
         }
         return startRow;
     }
+
 
     public void setStartRow(Integer startRow) {
         this.startRow = startRow;
@@ -89,6 +93,7 @@ public class PageQueryBean {
         this.totalPage = totalPage;
     }
 
+
     @Override
     public String toString() {
         return "PageQueryBean [currentPage=" + currentPage + ", pageSize="
@@ -96,5 +101,5 @@ public class PageQueryBean {
                 + startRow + ", totalPage=" + totalPage + ", items=" + items
                 + "]";
     }
-}
 
+}
