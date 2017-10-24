@@ -10,8 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
@@ -81,10 +81,20 @@ public class LoginController {
      */
     @RequestMapping("/register")
     @ResponseBody
-    public String register(@RequestBody User user, HttpServletRequest request) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public String register(User user, HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         // @RequestBody 通过json 的形式把用户传进来
-        userService.createUser(user);
-        return "succ";
+        String emailuser = request.getParameter("emailuser");
+        String emailpwd = request.getParameter("emailpwd");
+        String emailcode = request.getParameter("emailcode");
+        String strcode = session.getAttribute("strCode").toString();
+        if (emailcode.equals(strcode)) {
+            user.setUsername(emailuser);
+            user.setPassword(emailpwd);
+            userService.createUser(user);
+            return "register_succ";
+        } else {
+            return "register_error";
+        }
     }
 
     //    文件下载
