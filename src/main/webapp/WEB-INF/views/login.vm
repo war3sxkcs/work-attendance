@@ -108,7 +108,7 @@
                             <div class="form-group">
                                 <label for="code">验证码</label>
                                 <label>
-                                    <img src="/login/authCode" id="codeImage" onclick="chageCode()"
+                                    <img src="/login/authCode" id="codeImage" class="img-rounded" onclick="chageCode()"
                                          style="cursor:pointer;"/>
                                 </label>
                                 <label><a onclick="chageCode()">换一张</a></label>

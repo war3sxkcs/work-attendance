@@ -4,7 +4,7 @@ $("#submitId").click(function () {
     var veryfiy = true;
     if (user == 0 && pwd == 0) {
         $.pnotify({
-            title: 'New Thing',
+            title: 'Token',
             text: '请输入用户名和密码.',
             type: 'info'
         });
@@ -13,7 +13,7 @@ $("#submitId").click(function () {
     }
     if (user == 0) {
         $.pnotify({
-            title: 'New Thing',
+            title: 'UserName ',
             text: '请输入用户名.',
             type: 'error'
         });
@@ -21,7 +21,7 @@ $("#submitId").click(function () {
     }
     if (pwd == 0) {
         $.pnotify({
-            title: 'New Thing',
+            title: 'Password ',
             text: '请输入密码.',
             type: 'error'
         });
@@ -40,7 +40,7 @@ $("#submitId").click(function () {
                     window.location.href = "/user/home";
                 } else {
                     $.pnotify({
-                        title: 'New Thing',
+                        title: 'Error !',
                         text: '用户名或密码不正确,请重新输入.',
                         type: 'success'
                     });
