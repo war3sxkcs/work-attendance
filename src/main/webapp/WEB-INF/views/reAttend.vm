@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>码码在线考勤系统</title>
     <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -61,7 +60,7 @@
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="" class="user-image user_head_img" alt="User Image">
+                            <img src="" class="user-image user_head_img" alt="&nbsp;">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs user_name"></span>
                         </a>
@@ -86,9 +85,9 @@
         <section class="sidebar">
 
             <!-- Sidebar user panel (optional) -->
-            <div class="user-panel">
+            <div class="user-panel" style="height: 70px">
                 <div class="pull-left image">
-                    <img src="" class="img-circle  user_head_img" alt="User Image">
+                    <img src="" class="img-circle  user_head_img" alt="&nbsp;">
                 </div>
                 <div class="pull-left info">
                     <p class="user_name"></p>
@@ -131,54 +130,54 @@
 
         <!-- Main content -->
         <section class="content">
-                <!-- /.box-header -->
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <table id="attend_grid" class="table table-bordered table-striped">
-                        <thead>
+            <!-- /.box-header -->
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="attend_grid" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>补签日期</th>
+                        <th>早打卡</th>
+                        <th>晚打卡</th>
+                        <th>当前处理人</th>
+                        <th>状态</th>
+                    </tr>
+                    </thead>
+                    #foreach( $reAttend in $reAttendList )
                         <tr>
-                            <th>序号</th>
-                            <th>补签日期</th>
-                            <th>早打卡</th>
-                            <th>晚打卡</th>
-                            <th>当前处理人</th>
-                            <th>状态</th>
+                            <td>$foreach.count</td>
+                            <td>$date.format('yyyy-MM-dd',$reAttend.attendDate)</td>
+                            <td>$date.format('HH:mm:ss',$reAttend.reAttendMor)</td>
+                            <td>$date.format('HH:mm:ss',$reAttend.reAttendEve)</td>
+                            <td>$reAttend.currentHandler</td>
+                            <td>
+                                #if($reAttend.status==1)
+                                    处理中
+                                #elseif($reAttend.status==2)
+                                    审批通过
+                                #elseif($reAttend.status==3)
+                                    审批不通过
+                                #end
+                            </td>
                         </tr>
-                        </thead>
-                        #foreach( $reAttend in $reAttendList )
-                            <tr>
-                                <td>$foreach.count</td>
-                                <td>$date.format('yyyy-MM-dd',$reAttend.attendDate)</td>
-                                <td>$date.format('HH:mm:ss',$reAttend.reAttendMor)</td>
-                                <td>$date.format('HH:mm:ss',$reAttend.reAttendEve)</td>
-                                <td>$reAttend.currentHandler</td>
-                                <td>
-                                    #if($reAttend.status==1)
-                                        处理中
-                                    #elseif($reAttend.status==2)
-                                        审批通过
-                                    #elseif($reAttend.status==3)
-                                        审批不通过
-                                    #end
-                                </td>
-                            </tr>
-                        #end
-                    </table>
-                </div>
-                <div id="grid_pager"></div>
-                <!-- /.box-body -->
+                    #end
+                </table>
             </div>
-            <!-- /.box -->
-
-        </section>
-        <!-- /.content -->
+            <div id="grid_pager"></div>
+            <!-- /.box-body -->
     </div>
-    <!-- /.content-wrapper -->
+    <!-- /.box -->
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <strong>Copyright &copy; 2016 <a href="#">码码在线</a>.</strong> All rights reserved.
-    </footer>
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- Main Footer -->
+<footer class="main-footer">
+    <strong>Copyright &copy; 2016 <a href="#">码码在线</a>.</strong> All rights reserved.
+</footer>
 
 </div>
 <!-- ./wrapper -->

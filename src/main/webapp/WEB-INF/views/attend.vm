@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>码码在线考勤系统</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/ionicons.min.css">
@@ -39,7 +38,7 @@
                     </li>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="" class="user-image user_head_img" alt="User Image">
+                            <img src="" class="user-image user_head_img" alt="&nbsp;">
                             <span class="hidden-xs user_name"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -56,9 +55,9 @@
     </header>
     <aside class="main-sidebar">
         <section class="sidebar">
-            <div class="user-panel">
+            <div class="user-panel" style="height: 70px">
                 <div class="pull-left image">
-                    <img src="" class="img-circle  user_head_img" alt="User Image">
+                    <img src="" class="img-circle  user_head_img" alt="&nbsp;">
                 </div>
                 <div class="pull-left info">
                     <p class="user_name"></p>

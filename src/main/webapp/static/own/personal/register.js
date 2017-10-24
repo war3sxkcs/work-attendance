@@ -2,6 +2,8 @@ $("#register").click(function () {
     var user = $("#emailuser").val();
     var pwd = $("#emailpwd").val();
     var code = $("#emailcode").val();
+    var realname = $("#realname").val();
+    var mobile = $("#mobile").val();
     if (user == "" || pwd == "" || code == "") {
         $.pnotify({
             title: 'New Thing',
@@ -23,24 +25,25 @@ $("#register").click(function () {
     $.ajax({
         type: "POST",
         url: "/login/register",
-        data: {"emailuser": user, "emailpwd": pwd, "emailcode": code},
+        data: {"emailuser": user, "emailpwd": pwd, "emailcode": code, "realname": realname, "mobile": mobile},
         success: function (data) {
             if (data == "register_succ") {
                 $.pnotify({
                     title: 'New Thing',
-                    text: '注册成功,请注意查收电子邮件以便激活！.',
+                    text: '注册成功！.',
                     type: 'success'
                 });
                 $.pnotify({
                     title: 'New Thing',
-                    text: '注册成功,请注意查收电子邮件以便激活！.',
+                    text: '请注意查收电子邮件以便激活！.',
                     type: 'success'
                 });
                 $.pnotify({
                     title: 'New Thing',
-                    text: '注册成功,请注意查收电子邮件以便激活！.',
+                    text: '<a href="/login" style="text-decoration-line: none">跳转到主页登录</a>',
                     type: 'success'
                 });
+
             } else {
                 $.pnotify({
                     title: 'New Thing',

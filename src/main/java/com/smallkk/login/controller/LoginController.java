@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
@@ -87,9 +86,13 @@ public class LoginController {
         String emailpwd = request.getParameter("emailpwd");
         String emailcode = request.getParameter("emailcode");
         String strcode = session.getAttribute("strCode").toString();
+        String realname = request.getParameter("realname");
+        String mobile = request.getParameter("mobile");
         if (emailcode.equals(strcode)) {
             user.setUsername(emailuser);
             user.setPassword(emailpwd);
+            user.setRealName(realname);
+            user.setMobile(mobile);
             userService.createUser(user);
             return "register_succ";
         } else {
