@@ -12,8 +12,8 @@
         <result column="attend_status" property="attendStatus" jdbcType="TINYINT"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, user_id, attend_date, attend_week, attend_morning, attend_evening, absence, attend_status
-  </sql>
+        id, user_id, attend_date, attend_week, attend_morning, attend_evening, absence, attend_status
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
@@ -25,9 +25,28 @@
         <include refid="Base_Column_List"/>
         from attend
         where user_id = #{userId}
-        AND
-        attend_date= CURRENT_DATE();
-
+        AND attend_date= CURDATE()
+    </select>
+    <select id="selectTodayAbsence" resultType="Long">
+        select
+        u.id
+        from `user` u
+        where u.id NOT IN (
+        SELECT
+        a.user_id
+        FROM attend a
+        WHERE a.attend_date=CURRENT_DATE
+        )
+    </select>
+    <select id="selectTodayEveningAbsence" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from attend
+        where
+        attend_date=CURRENT_DATE
+        AND attend_evening IS NULL
+        AND attend_status=1
+        AND attend_week NOT IN (6,7)
     </select>
     <select id="selectAttendPage" resultMap="BaseResultMap">
         select
@@ -49,17 +68,26 @@
         </if>
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from attend
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from attend
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="batchInsert" parameterType="list">
+        INSERT into
+        attend (user_id,attend_date,attend_week,absence,attend_status)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.userId},#{item.attendDate},#{item.attendWeek},#{item.absence},#{item.attendStatus})
+        </foreach>
+    </insert>
+
     <insert id="insert" parameterType="com.smallkk.attend.entity.Attend">
-    insert into attend (id, user_id, attend_date, 
-      attend_week, attend_morning, attend_evening, 
-      absence, attend_status)
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{attendDate,jdbcType=DATE}, 
-      #{attendWeek,jdbcType=TINYINT}, #{attendMorning,jdbcType=TIME}, #{attendEvening,jdbcType=TIME}, 
-      #{absence,jdbcType=INTEGER}, #{attendStatus,jdbcType=TINYINT})
-  </insert>
+        insert into attend (id, user_id, attend_date,
+        attend_week, attend_morning, attend_evening,
+        absence, attend_status)
+        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{attendDate,jdbcType=DATE},
+        #{attendWeek,jdbcType=TINYINT}, #{attendMorning,jdbcType=TIME}, #{attendEvening,jdbcType=TIME},
+        #{absence,jdbcType=INTEGER}, #{attendStatus,jdbcType=TINYINT})
+    </insert>
     <insert id="insertSelective" parameterType="com.smallkk.attend.entity.Attend">
         insert into attend
         <trim prefix="(" suffix=")" suffixOverrides=",">

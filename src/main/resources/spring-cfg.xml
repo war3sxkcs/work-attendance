@@ -72,4 +72,7 @@
         <property name="filters" value="mergeStat"/>
     </bean>
 
+    <!--将Quartz导入到spring-cfg才能够启动-->
+    <import resource="spring-job.xml"/>
+
 </beans>

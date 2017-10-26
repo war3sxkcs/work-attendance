@@ -11,7 +11,24 @@ import com.smallkk.vo.QueryCondition;
  * @date 2017/10/22 16:54
  */
 public interface AttendService {
+    /**
+     * 签到
+     *
+     * @param attend
+     * @throws Exception
+     */
     void signAttend(Attend attend) throws Exception;
 
+    /**
+     * 分页查询
+     *
+     * @param condition
+     * @return
+     */
     PageQueryBean listAttend(QueryCondition condition);
+
+    /**
+     * 任务调度
+     */
+    void checkAttend();
 }
