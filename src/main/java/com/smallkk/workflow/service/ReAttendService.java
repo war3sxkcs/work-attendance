@@ -1,7 +1,9 @@
 package com.smallkk.workflow.service;
 
+
+import com.smallkk.workflow.entity.ReAttend;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created By  醉美柳舞之众星捧月
@@ -12,9 +14,11 @@ import java.util.Map;
 
 public interface ReAttendService {
 
-    void startReAttendFlow(Map varibles);
+    void startReAttendFlow(ReAttend reAttend);
 
-    List<org.activiti.engine.task.Task> listTasks(Map varibles);
+    List<ReAttend> listTasks(String userName);
 
-    void approve(String taskId);
+    void approve(ReAttend reAttend);
+
+    List<ReAttend> listReAttend(String username);
 }

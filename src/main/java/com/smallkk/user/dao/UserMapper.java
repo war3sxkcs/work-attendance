@@ -1,6 +1,6 @@
 package com.smallkk.user.dao;
 
-        import com.smallkk.user.entity.User;
+import com.smallkk.user.entity.User;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);

@@ -1,13 +1,19 @@
 package com.smallkk.workflow.service;
 
-import org.activiti.engine.HistoryService;
+import com.smallkk.attend.dao.AttendMapper;
+import com.smallkk.attend.entity.Attend;
+import com.smallkk.workflow.dao.ReAttendMapper;
+import com.smallkk.workflow.entity.ReAttend;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,39 +24,125 @@ import java.util.Map;
  * @author song
  * @date 2017/10/26 22:38
  */
+
+/**
+ * Author song  醉美柳舞之众星捧月
+ * Date & Time  2017/10/27 12:19
+ * Description  补签实现类
+ */
 @Service("reAttendServiceImpl")
 public class ReAttendServiceImpl implements ReAttendService {
 
     private static final java.lang.String RE_ATTEND_FLOW_ID = "re_attend";
+
+    /**
+     * 补签流程状态
+     */
+    private static final Byte RE_ATTEND_STATUS_ONGOING = 1;
+    private static final Byte RE_ATTEND_STATUS_PSSS = 2;
+    private static final Byte RE_ATTEND_STATUS_REFUSE = 3;
+    /**
+     *
+     */
+    private static final Byte ATTEND_STATUS_NORMAL = 1;
+    /**
+     * 流程下一步处理人
+     */
+    private static final String NEXT_HANDLER = "next_handler";
+    /**
+     * 任务关联补签数据键
+     */
+    private static final String RE_ATTEND_SIGN = "re_attend";
+
     @Autowired
     private RuntimeService runtimeService;
+
     @Autowired
     private TaskService taskService;
-    @Autowired
-    private HistoryService historyService;
 
+    @Autowired
+    private ReAttendMapper reAttendMapper;
+
+    @Autowired
+    private AttendMapper attendMapper;
+
+    /**
+     * Author song  醉美柳舞之众星捧月
+     * Date & Time  2017/10/27 12:10
+     * Description  开启工作流
+     */
     @Override
-    public void startReAttendFlow(Map varibles) {
-        ProcessInstance instance = runtimeService.startProcessInstanceByKey(RE_ATTEND_FLOW_ID, varibles);
-        System.out.println(instance.getId() + "-----" + instance.getActivityId());
-        Task task = taskService.createTaskQuery().processInstanceId(instance.getId()).singleResult();
-        System.out.println(task.getId() + "--" + task.getName());
+    @Transactional(rollbackFor = Exception.class)
+    public void startReAttendFlow(ReAttend reAttend) {
+        //从公司组织架构中 查询到此人上级领导用户
+        reAttend.setCurrentHandler("admin");
+        reAttend.setStatus(RE_ATTEND_STATUS_ONGOING);
+        //插入数据库补签表
+        reAttendMapper.insertSelective(reAttend);
         Map<String, Object> map = new HashMap();
-        map.put("attend_moring", "09:00");
-        map.put("attend_evening", "18:30");
+        map.put(RE_ATTEND_SIGN, reAttend);
+        map.put(NEXT_HANDLER, reAttend.getCurrentHandler());
+        //启动补签流程实例
+        ProcessInstance instance = runtimeService.startProcessInstanceByKey(RE_ATTEND_FLOW_ID, map);
+        //提交用户补签任务
+        Task task = taskService.createTaskQuery().processInstanceId(instance.getId()).singleResult();
         taskService.complete(task.getId(), map);
     }
 
+    /**
+     * Author song  醉美柳舞之众星捧月
+     * Date & Time  2017/10/27 12:10
+     * Description  根据流程任务变量 查询某人需要处理的任务
+     */
     @Override
-    public List<org.activiti.engine.task.Task> listTasks(Map varibles) {
-        List<Task> taskList = taskService.createTaskQuery().taskDefinitionKey("re_attend_approve").active().list();
-        Map<String, Object> param = taskService.getVariables(taskList.get(0).getId());
-        return taskList;
+    public List<ReAttend> listTasks(String userName) {
+        List<ReAttend> reAttendList = new ArrayList();
+        List<Task> taskList = taskService.createTaskQuery().processVariableValueEquals(userName).list();
+        //转换成页面实体
+        if (CollectionUtils.isNotEmpty(taskList)) {
+            for (Task task : taskList) {
+                Map<String, Object> variable = taskService.getVariables(task.getId());
+                ReAttend reAttend = (ReAttend) variable.get(RE_ATTEND_SIGN);
+                reAttend.setTaskId(task.getId());
+                reAttendList.add(reAttend);
+            }
+        }
+        return reAttendList;
     }
 
+    /**
+     * Author song  醉美柳舞之众星捧月
+     * Date & Time  2017/10/27 12:12
+     * Description  审批工作流
+     */
     @Override
-    public void approve(String taskId) {
-        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
-        taskService.complete(taskId);
+    public void approve(ReAttend reAttend) {
+        Task task = taskService.createTaskQuery().taskId(reAttend.getTaskId()).singleResult();
+
+        if (("" + RE_ATTEND_STATUS_PSSS).equals(reAttend.getApproveFlag())) {
+            //审批通过 修改补签数据状态
+            //修改相关考勤数据 考勤状态改为正常
+            Attend attend = new Attend();
+            attend.setId(reAttend.getAttendId());
+            attend.setAttendStatus(ATTEND_STATUS_NORMAL);
+            attendMapper.updateByPrimaryKeySelective(attend);
+            reAttend.setStatus(RE_ATTEND_STATUS_PSSS);
+            reAttendMapper.updateByPrimaryKeySelective(reAttend);
+        } else if (("" + RE_ATTEND_STATUS_REFUSE).equals(reAttend.getApproveFlag())) {
+            reAttend.setStatus(RE_ATTEND_STATUS_REFUSE);
+            reAttendMapper.updateByPrimaryKeySelective(reAttend);
+        }
+        taskService.complete(reAttend.getTaskId());
+    }
+
+    /**
+     * Author song  醉美柳舞之众星捧月
+     * Date & Time  2017/10/27 12:17
+     * Description  查询补签申请状态
+     */
+    @Override
+    public List<ReAttend> listReAttend(String username) {
+        List<ReAttend> list = reAttendMapper.selectReAttendRecord(username);
+        return list;
     }
 }

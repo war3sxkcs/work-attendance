@@ -47,7 +47,7 @@
                             <input type="password" id="pwd" class="form-control">
                         </div>
                         <div class="checkbox pull-left">
-                            <label><input type="checkbox" data-toggle="modal" data-target="#myModal">记住用户名</label>
+                            <label><input id="remember" type="checkbox" data-toggle="modal" data-target="#myModal">记住用户名</label>
                         </div>
                         <button id="submitId" class="btn btn btn-primary pull-right" type="button">登 录</button>
                         <hr>
@@ -123,7 +123,7 @@
                                 <input id="mobile" type="text" class="form-control" placeholder="请输入您的电话号码">
                             </div>
                             <div class="text-center form-group">
-                                <img src="http://placehold.it/150" class="avatar img-circle" alt="avatar">
+                                <img src="http://placehold.it/150" class="avatar img-circle" alt="avatar" id="image">
                                 <h6>Upload a different photo...</h6>
                                 <div class="input-group">
                                       <span class="input-group-btn">

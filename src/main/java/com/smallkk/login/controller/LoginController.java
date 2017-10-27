@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -54,13 +55,33 @@ public class LoginController {
      */
     @RequestMapping("/check")
     @ResponseBody    //  因为异步;要添加@ResponseBody注解; 否则就404
-    public String CheckLogin(HttpServletRequest request) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public String CheckLogin(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+
         String username = request.getParameter("username");
         String pwd = request.getParameter("password");
+        String remember = request.getParameter("remember");
+        System.out.println(remember);
         //调用MD5
         User user = userService.findUserByUserName(username);
         if (user != null) {
             if (SecurityUtils.checkPassword(pwd, user.getPassword())) {
+                //Session功能记住密码;   暂时无效
+                if (remember.equals("1")) {
+                    Cookie usernamecookie = new Cookie("username", username);
+                    usernamecookie.setMaxAge(3600 * 24);
+                    Cookie pwdcookie = new Cookie("password", pwd);
+                    pwdcookie.setMaxAge(3600 * 24);
+                    response.addCookie(usernamecookie);
+                    response.addCookie(pwdcookie);
+                }
+                if (request.getCookies() != null) {
+                    Cookie[] cookies = request.getCookies();
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals("password")) {
+                            pwd = cookie.getValue();
+                        }
+                    }
+                }
                 //此处登录成功 可以设置session
                 request.getSession().setAttribute("userinfo", user);
                 return "login_succ";
