@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
  * @author song
  * @date 2017/10/19 22:09
  */
-public class SecurityUtils {
+public class MD5Utils {
     /**
      * Author song  醉美柳舞之众星捧月
      * Date & Time  2017/10/19 22:09

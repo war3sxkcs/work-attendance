@@ -9,6 +9,7 @@ $("#submitId").click(function () {
     } else {
         var remember = "0";
     }
+
     if (user == 0 && pwd == 0) {
         $.pnotify({
             title: 'Token',

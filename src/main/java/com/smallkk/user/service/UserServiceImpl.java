@@ -1,6 +1,6 @@
 package com.smallkk.user.service;
 
-import com.smallkk.common.utils.SecurityUtils;
+import com.smallkk.common.utils.MD5Utils;
 import com.smallkk.user.dao.UserMapper;
 import com.smallkk.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void createUser(User user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        user.setPassword(SecurityUtils.encrptyPassword(user.getPassword()));
+        user.setPassword(MD5Utils.encrptyPassword(user.getPassword()));
         userMapper.insertSelective(user);
     }
 }

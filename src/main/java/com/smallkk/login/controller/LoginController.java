@@ -1,9 +1,11 @@
 package com.smallkk.login.controller;
 
-import com.smallkk.common.utils.SecurityUtils;
 import com.smallkk.user.entity.User;
 import com.smallkk.user.service.UserService;
 import org.apache.commons.io.FileUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -56,42 +57,35 @@ public class LoginController {
     @RequestMapping("/check")
     @ResponseBody    //  因为异步;要添加@ResponseBody注解; 否则就404
     public String CheckLogin(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-
         String username = request.getParameter("username");
         String pwd = request.getParameter("password");
         String remember = request.getParameter("remember");
-        System.out.println(remember);
-        //调用MD5
-        User user = userService.findUserByUserName(username);
-        if (user != null) {
-            if (SecurityUtils.checkPassword(pwd, user.getPassword())) {
-                //Session功能记住密码;   暂时无效
-                if (remember.equals("1")) {
-                    Cookie usernamecookie = new Cookie("username", username);
-                    usernamecookie.setMaxAge(3600 * 24);
-                    Cookie pwdcookie = new Cookie("password", pwd);
-                    pwdcookie.setMaxAge(3600 * 24);
-                    response.addCookie(usernamecookie);
-                    response.addCookie(pwdcookie);
-                }
-                if (request.getCookies() != null) {
-                    Cookie[] cookies = request.getCookies();
-                    for (Cookie cookie : cookies) {
-                        if (cookie.getName().equals("password")) {
-                            pwd = cookie.getValue();
-                        }
-                    }
-                }
-                //此处登录成功 可以设置session
-                request.getSession().setAttribute("userinfo", user);
-                return "login_succ";
-            } else {
-                //返回失败信号
-                return "login_fail";
-            }
-        } else {
+        UsernamePasswordToken token = new UsernamePasswordToken(username, pwd);
+        if (remember.equals("1")) {
+            token.setRememberMe(true);
+        }
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(token);
+            SecurityUtils.getSubject().getSession().setTimeout(30000);
+        } catch (Exception e) {
             return "login_fail";
         }
+        return "login_succ";
+//        此处调用MD5 和 数据库进行匹配  已经被   Shiro取代  !!!!
+//        User user = userService.findUserByUserName(username);
+//        if (user != null) {
+//            if (MD5Utils.checkPassword(pwd, user.getPassword())) {
+//                //此处登录成功 可以设置session
+//                request.getSession().setAttribute("userinfo", user);
+//                return "login_succ";
+//            } else {
+//                //返回失败信号
+//                return "login_fail";
+//            }
+//        } else {
+//            return "login_fail";
+//        }
     }
 
     /**
@@ -124,7 +118,7 @@ public class LoginController {
     //    文件下载
     @RequestMapping("/down")
     public ResponseEntity<byte[]> download() throws IOException {
-        String path = "\\static\\personal\\1.jpg";
+        String path = "";
         //  文件所在地和文件的名字格式
         File file = new File(path);
         HttpHeaders headers = new HttpHeaders();      //告诉Http头

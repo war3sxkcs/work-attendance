@@ -73,7 +73,6 @@
         <property name="filters" value="mergeStat"/>
     </bean>
 
-
     <!--流程引擎配置项-->
     <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
         <!--数据源 和系统同一个-->
@@ -110,5 +109,6 @@
     <bean id="IdentityService" factory-bean="processEngine" factory-method="getIdentityService"/>
     <!--将Quartz导入到spring-cfg才能够启动-->
     <import resource="spring-job.xml"/>
-
+    <!--导入Shiro-->
+    <import resource="spring-shiro.xml"/>
 </beans>

@@ -1,11 +1,14 @@
 package com.smallkk.user.controller;
+
 import com.smallkk.user.entity.User;
 import com.smallkk.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpSession;
+
 /**
  * Created By  醉美柳舞之众星捧月
  *
@@ -47,8 +50,10 @@ public class UserController {
      */
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
-        session.invalidate();
+        //HttpSession的方式
+        // session.invalidate();
         //摧毁session
+
         return "login";
     }
 }
