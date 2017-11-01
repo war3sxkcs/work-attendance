@@ -30,7 +30,7 @@
     </div>
     <div class="lockscreen-name">您没有权限进入此页面</div>
     <div class="lockscreen-image">
-        <img src="http://api.randomuser.me/portraits/thumb/men/41.jpg" alt="user image">
+        <img src="/static/dist/img/user2-160x160.jpg" alt="user image">
     </div>
     <div class="lockscreen-item">
         <div class="lockscreen-credentials">
