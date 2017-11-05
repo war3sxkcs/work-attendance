@@ -8,19 +8,14 @@ import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-
 /**
  * Created By  醉美柳舞之众星捧月
- *
  * @author song
  * @date 2017/10/31 13:52
  */
 public class CustomCredentialsMatcher extends SimpleCredentialsMatcher {
-
-
     /**
      * 自定义密码验证
-     *
      * @param token
      * @param info
      * @return

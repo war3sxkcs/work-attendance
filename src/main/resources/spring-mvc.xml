@@ -12,14 +12,11 @@
       http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
       http://www.springframework.org/schema/aop
       http://www.springframework.org/schema/aop/spring-aop.xsd">
-
     <!--开启切面编程自动代理       权限注解    基于Controller 的注解  -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"/>
     </bean>
-
-
     <!--                         配置json                       -->
     <mvc:annotation-driven>
         <mvc:message-converters>
@@ -76,7 +73,6 @@
         <property name="maxInMemorySize" value="50000"/>
         <property name="defaultEncoding" value="utf-8"/>
     </bean>
-
     <!--错误配置-->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
@@ -85,5 +81,4 @@
             </props>
         </property>
     </bean>
-
 </beans>

@@ -51,7 +51,7 @@ public class UserController {
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         //HttpSession的方式
-        // session.invalidate();
+//       session.invalidate();
         //摧毁session
 
         return "login";
