@@ -21,7 +21,7 @@
     <!--整合Mybatis-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:com/smallkk/**/**.xml"/>
+        <property name="mapperLocations" value="classpath:com/smallkk/attend/dao/AttendMapper.xml"/>
     </bean>
     <!-- Mapper的接口扫描-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

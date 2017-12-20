@@ -1,10 +1,9 @@
 package com.smallkk.common.utils;
 
-import sun.misc.BASE64Encoder;
-
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 /**
  * Created By  醉美柳舞之众星捧月
@@ -20,8 +19,12 @@ public class MD5Utils {
      */
     public static String encrptyPassword(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest md5 = MessageDigest.getInstance("MD5");
-        BASE64Encoder base64Encoder = new BASE64Encoder();
-        String result = base64Encoder.encode(md5.digest(password.getBytes("utf-8")));
+//JDK9.0已经不再支持BASE64Encoder;rj.jar包已经从JDK里面移除;
+        //用import java.util.Base64;来替换
+//        BASE64Encoder base64Encoder = new BASE64Encoder();
+//        String result = base64Encoder.encode(md5.digest(password.getBytes("utf-8")));
+        Base64.Encoder encoder = Base64.getEncoder();
+        String result = encoder.encodeToString(md5.digest(password.getBytes("utf-8")));
         // 通过utf-8的方式生成字节码 把密码转换 ;再让BASE64Encoder转换一下,防止加密乱码啊什么的
         return result;
     }
