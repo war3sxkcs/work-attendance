@@ -27,8 +27,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
-import static org.apache.shiro.web.filter.mgt.DefaultFilter.user;
-
 /**
  * Created By  醉美柳舞之众星捧月
  *

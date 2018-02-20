@@ -5,8 +5,12 @@ import com.smallkk.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -55,5 +59,24 @@ public class UserController {
         //摧毁session
 
         return "login";
+    }
+
+    /**
+     * 修改头像
+     *
+     * @param request
+     * @param file
+     * @return
+     * @throws
+     */
+    @RequestMapping(value = "/uploadHeadImg", method = RequestMethod.POST)
+    public String uploadHeadImg(HttpServletRequest request, @RequestParam(required = false) MultipartFile file) {
+        try {
+            User user = new User();
+            String lalala = userService.uploadHeadImg(file, user.getId());
+        } catch (Exception e) {
+            return "上传出现意外！";
+        }
+        return "上传成功！";
     }
 }

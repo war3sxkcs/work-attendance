@@ -7,7 +7,7 @@ $("#register").click(function () {
     if (user == "" || pwd == "" || code == "") {
         $.pnotify({
             title: '注册信息',
-            text: '请正确输入您的注册信息！.',
+            text: '请正确输入您的注册信息 !',
             type: 'error'
         });
         return;
@@ -16,7 +16,7 @@ $("#register").click(function () {
     if (!regex.test(user)) {
         $.pnotify({
             title: '邮箱',
-            text: '您输入的邮箱格式不合法！.',
+            text: '您输入的邮箱格式不合法 !',
             type: 'error'
         });
         return;
@@ -30,12 +30,12 @@ $("#register").click(function () {
             if (data == "register_succ") {
                 $.pnotify({
                     title: 'success ! ',
-                    text: '注册成功！.',
+                    text: '注册成功 !',
                     type: 'success'
                 });
                 $.pnotify({
                     title: 'success ! ',
-                    text: '请注意查收电子邮件以便激活！.',
+                    text: '请注意查收电子邮件以便激活 !',
                     type: 'success'
                 });
                 $.pnotify({
@@ -47,7 +47,7 @@ $("#register").click(function () {
             } else {
                 $.pnotify({
                     title: '验证码',
-                    text: '您输入的验证码不正确,请重新注册！.',
+                    text: '您输入的验证码不正确,请重新注册 !',
                     type: 'error'
                 });
             }

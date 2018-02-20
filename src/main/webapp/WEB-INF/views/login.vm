@@ -123,12 +123,14 @@
                                 <input id="mobile" type="text" class="form-control" placeholder="请输入您的电话号码">
                             </div>
                             <div class="text-center form-group">
-                                <img src="http://placehold.it/150" class="avatar img-circle" alt="avatar" id="image">
+                                <img src="" class="avatar img-circle" alt="avatar" id="image">
                                 <h6>Upload a different photo...</h6>
                                 <div class="input-group">
                                       <span class="input-group-btn">
                                              <span class="btn btn-primary btn-file">
-                                                 <input type="file" multiple="">
+                                                 <input type="file" id="uploadImage" name="file">
+                                                 <input id="imageBtnImportSubmit" class="btn btn-primary" type="button"
+                                                        value="导入图片">
                                              </span>
                                       </span>
                                 </div>
@@ -152,4 +154,22 @@
 <script type="text/javascript" src="/static/own/personal/register.js"></script>
 <script type="text/javascript" src="/static/own/personal/map.js"></script>
 <script type="text/javascript" src="/static/own/personal/load.js"></script>
+<script>
+    function doUpLoadImage() {
+        var fileObj = document.getElementById("uploadImage").files[0];
+        var formData = new FormData();
+        formData.append("file", fileObj);
+        $.ajax({
+            url: 'user/uploadHeadImg',
+            type: 'POST',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (returndata) {
+                document.getElementById("image").value = returndata;
+            }
+        })
+    }
+</script>
 

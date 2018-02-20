@@ -1,6 +1,7 @@
 package com.smallkk.user.service;
 
 import com.smallkk.user.entity.User;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -15,4 +16,6 @@ public interface UserService {
     User findUserByUserName(String username);
 
     void createUser(User user) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+
+    String uploadHeadImg(MultipartFile file, Long id);
 }
