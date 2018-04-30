@@ -56,12 +56,12 @@ public class LoginController {
      */
     @RequestMapping("/check")
     @ResponseBody    //  因为异步;要添加@ResponseBody注解; 否则就404
-    public String CheckLogin(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public String checkLogin(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String username = request.getParameter("username");
         String pwd = request.getParameter("password");
         String remember = request.getParameter("remember");
         UsernamePasswordToken token = new UsernamePasswordToken(username, pwd);
-        if (remember.equals("1")) {
+        if ("1".equals(remember)) {
             token.setRememberMe(true);
         }
         Subject subject = SecurityUtils.getSubject();
